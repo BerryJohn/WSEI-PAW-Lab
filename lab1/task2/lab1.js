@@ -21,11 +21,10 @@ function filterPersons(persons, criteria) {
         .filter(function (el) {
         var meetsCriteria = true;
         for (var key in criteria) {
-            if (el[key] != criteria[key] && typeof el[key] != "undefined")
+            if (el[key] != criteria[key]) // ?->&& typeof el[key] != "undefined"
                 meetsCriteria = false;
         }
-        if (meetsCriteria)
-            return el;
+        return meetsCriteria;
     });
 }
 // TODO:

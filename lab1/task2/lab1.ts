@@ -26,11 +26,10 @@ interface Person {
         .filter(el => {
             let meetsCriteria: boolean = true;
             for (const key in criteria) {
-                if(el[key] != criteria[key] && typeof el[key] != "undefined")
+                if(el[key] != criteria[key]) // ?->&& typeof el[key] != "undefined"
                     meetsCriteria = false;
             }
-            if(meetsCriteria)
-                return el;
+            return meetsCriteria;
         })
   
     }   
