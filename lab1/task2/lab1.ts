@@ -31,7 +31,6 @@ interface Person {
             }
             return meetsCriteria;
         })
-  
     }   
     // TODO:
     // 1. Przy pomocy funkcji logPerson wypisać osoby z tablicy users i admins (patrz foreach)
