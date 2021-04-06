@@ -1,5 +1,5 @@
 export class cell{
-    _value: string;
+    _value: string = '';
     _htmlElement: HTMLElement;
     
     constructor(element: HTMLElement)
@@ -8,7 +8,9 @@ export class cell{
     }
     changeValue(newValue: string)
     {
-        this._value = newValue;
-        this._htmlElement.innerHTML = this._value;
+        if(this._value === ''){
+            this._value = newValue;
+            this._htmlElement.innerHTML = this._value;
+        }
     }
 }

@@ -4,17 +4,24 @@ export class board{
     _cellArr: cell[];
     _board: HTMLElement;
     _currentMove: string = 'O';
+    _base: number;
+    _gameStatus: boolean = true; // 0 = finished
+    _allMoves: number = 0;
     constructor(size: number)
     {
+        this._base = size;
+        const allCells: number = Math.pow(size,2);
         this._board = document.querySelector('.board');
-        this._cellArr = new Array(size);
-        for(let i = 0; i < size; i++)
+        this._cellArr = new Array(allCells);
+        for(let i = 0; i < allCells; i++)
         {
             const element: HTMLElement = document.createElement('div');
             element.classList.add('field');
             element.id = `${i}`;
-            element.addEventListener('mouseup', e => console.log(e.target))
+
             let newCell = new cell(element);
+
+            newCell._htmlElement.addEventListener('mouseup', e => this.move(e.target))
             this._cellArr[i] = newCell;
         }
     }
@@ -23,7 +30,58 @@ export class board{
             this._board.appendChild(element._htmlElement);
         }
     }
-    move(){
-
+    move(ev: EventTarget): void{
+        const currentCell = this._cellArr.filter(el => el._htmlElement == ev)
+        if(currentCell[0]._value == '' && this._gameStatus)
+        {
+            currentCell[0].changeValue(this._currentMove);
+            this._allMoves++;
+            this.checkWin(parseInt(currentCell[0]._htmlElement.id))
+            this.changePlayer();
+        }
+    }
+    changePlayer(): void{
+        if(this._currentMove === 'O')
+            this._currentMove = 'X';
+        else
+            this._currentMove = 'O';
+        document.querySelector('#currentPlayer').innerHTML = this._currentMove;
+    }
+    checkWin(currId: number): void{
+        for(let i = 0; i<this._base; i++)
+        {
+            if(this._cellArr[i]._value != '' || this._cellArr[i + this._base]._value != '' || this._cellArr[i + 2*this._base]._value != '')
+                if(this._cellArr[i]._value == this._cellArr[i + this._base]._value && this._cellArr[i]._value == this._cellArr[i + 2*this._base]._value)
+                    this.callWinner()
+        }
+        for(let i = 0; i<this._base*this._base; i+=this._base)
+        {
+            if(this._cellArr[i]._value != '' || this._cellArr[i + 1]._value != '' || this._cellArr[i + 2]._value != '')
+                if(this._cellArr[i]._value == this._cellArr[i + 1]._value && this._cellArr[i]._value == this._cellArr[i + 2]._value)
+                    this.callWinner()
+        }
+        if(this._cellArr[0]._value !=  '' && this._cellArr[4]._value !=  '' && this._cellArr[8]._value !=  '' )
+            if(this._cellArr[0]._value == this._cellArr[4]._value && this._cellArr[0]._value == this._cellArr[8]._value)
+            this.callWinner()
+        if(this._cellArr[2]._value !=  '' && this._cellArr[4]._value !=  '' && this._cellArr[6]._value !=  '' )
+            if(this._cellArr[2]._value == this._cellArr[4]._value && this._cellArr[2]._value == this._cellArr[6]._value)
+            this.callWinner()
+        //draw
+        console.log(this._allMoves);
+        if(this._allMoves == this._cellArr.length)
+            this.callDraw();
+                
+    }
+    callWinner() :void{
+        this._gameStatus = false;
+        const info: HTMLElement = document.querySelector('.winner');
+        info.style.display = 'flex';
+        info.innerHTML = `Player: ${this._currentMove} has won`;
+    }
+    callDraw() :void{
+        this._gameStatus = false;
+        const info: HTMLElement = document.querySelector('.winner');
+        info.style.display = 'flex';
+        info.innerHTML = `DRAW`;
     }
 }
