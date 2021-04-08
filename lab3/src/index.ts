@@ -4,22 +4,15 @@ import { gameFactory } from "./gameFactory.class";
 
 class App {
     private _gameFactory: gameFactory;
-    private gameContainer: HTMLDivElement;
 
     constructor() {
         this._gameFactory = new gameFactory();
-        this.initMenu();        
-    }
-    
-    changeGame(name: string): void{
-        const game = this._gameFactory.createGame(Games[name]);
-        this.gameContainer.innerHTML = ''; //clear
-        this.gameContainer.appendChild(game.getGameElement());
+        this.initMenu();     
     }
 
     initMenu(): void {
         const menuContainer = <HTMLDivElement>(document.createElement('div')); // kontener menu dostępnych gier
-        this.gameContainer = <HTMLDivElement>(document.createElement('div')); // kontener główny ekranu z grą
+        const gameContainer = <HTMLDivElement>(document.createElement('div')); // kontener główny ekranu z grą
         const list = document.createElement('ul'); // lista pozycji w menu dostępnych gier
         
         // TODO: Zaimplementuj wzorzec fabryki/metody fabrykującej, tak aby na podstawie konkretnej wartości z enum
@@ -33,16 +26,15 @@ class App {
                     const gameName = <HTMLLIElement>(document.createElement('li'));
                     gameName.innerText = `${element}`;
                     gameName.addEventListener('click', e => {
-                        const newGameName: string = (e.target as HTMLElement).innerText;
-                        this.changeGame( newGameName )
+                        const selectedGame: string = (e.target as HTMLElement).innerText;
+                        this._gameFactory.createGame(Games[selectedGame])
                     });
                     list.appendChild(gameName);
                 }
         }
-
         menuContainer.appendChild(list);
         document.body.appendChild(menuContainer);
-        document.body.appendChild(this.gameContainer);
+        document.body.appendChild(gameContainer);
     }
 }
 
