@@ -2,16 +2,16 @@ import {cell} from './cell';
 
 export class board{
     _cellArr: cell[];
-    _board: HTMLElement;
+    _board: Element;
     _currentMove: string = 'O';
     _base: number;
     _gameStatus: boolean = true; // 0 = finished
     _allMoves: number = 0;
-    constructor(size: number)
+    constructor(size: number, board: Element)
     {
         this._base = size;
         const allCells: number = Math.pow(size,2);
-        this._board = document.querySelector('.board');
+        this._board = board;
         this._cellArr = new Array(allCells);
         for(let i = 0; i < allCells; i++)
         {

@@ -6,6 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style> 
+/* styles for tictactoe */
+    .board{
+        position: relative;
+        width:600px;
+        height:600px;
+        background-color: black;
+        display:flex;
+        flex-wrap:wrap;
+    }
+    .field{
+        width:180px;
+        height:180px;
+        margin:10px;
+        background-color: white;
+        font-size:144px;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .playerinfo{
+        width:200px;
+        height:25px;
+        background-color: rgb(163, 163, 163);
+        border: 2px solid black;
+        font-size:22px;
+        text-align: center;
+    }
+    .winner{
+        display:none;
+        position: absolute;
+        width:300px;
+        height:150px;
+        background:rgb(175, 175, 175);
+        border: 1px solid black;
+        justify-content: center;
+        align-items: center;
+        font-size:24px;
+        right:calc(50% - 150px);
+        top:calc(50% - 75px);
+    }
+</style>
 <body>
     <script defer src="index.js"></script>
 </body>
