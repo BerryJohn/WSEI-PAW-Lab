@@ -31,20 +31,11 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
-          {
-            loader: "style-loader"
-            // options: {
-            //   // injectType: "singletonStyleTag"
-            //   // injectType: "linkTag"
-            // }
-          },
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader"
-        ]
-      }
-    ]
-  }
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
 };

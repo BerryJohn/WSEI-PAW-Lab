@@ -1,4 +1,4 @@
 import {board} from './Classes/board';
-
-const game:board = new board(3);
+const gameBoard = document.querySelector('.board');
+const game: board = new board(3, gameBoard);
 game.init();

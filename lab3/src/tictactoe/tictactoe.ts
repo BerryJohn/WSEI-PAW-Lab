@@ -1,4 +1,5 @@
 import { Game } from "../game.model";
+import { board } from '../../../lab2b-ticktoe/src/Classes/board';
 
 export class TicTacToe implements Game {
     name: string;
@@ -8,7 +9,12 @@ export class TicTacToe implements Game {
     }
     getGameElement(): HTMLElement {
         const div = document.createElement('div');
-        div.appendChild(document.createTextNode("Hello TicTacToe"));
+        const divWinner = document.createElement('div');
+        divWinner.classList.add('winner');
+        div.appendChild(divWinner);
+        div.classList.add('board');
+        const game: board = new board(3,div);
+        game.init();
         return div;
     }
 }

@@ -1,21 +1,29 @@
 import { Games } from "./game.enum";
 import { gameFactory } from "./gameFactory.class";
-
+import './styles/styles.scss';
 
 class App {
     private _gameFactory: gameFactory;
-    // private gameContainer: HTMLDivElement;
+    private gameContainer: HTMLDivElement;
 
     constructor() {
         this._gameFactory = new gameFactory();
-        this.initMenu();     
+        this.initMenu();        
+    }
+
+    changeGame(name: string): void{
+        const game = this._gameFactory.createGame(Games[name]);
+        this.gameContainer.innerHTML = ''; //clear
+        this.gameContainer.appendChild(game.getGameElement());
     }
 
     initMenu(): void {
         const menuContainer = <HTMLDivElement>(document.createElement('div')); // kontener menu dostępnych gier
-        const gameContainer = <HTMLDivElement>(document.createElement('div')); // kontener główny ekranu z grą
+        menuContainer.classList.add('menuContainer');
+        this.gameContainer = <HTMLDivElement>(document.createElement('div')); // kontener główny ekranu z grą
+        this.gameContainer.classList.add('gameContainer');
         const list = document.createElement('ul'); // lista pozycji w menu dostępnych gier
-        
+
         // TODO: Zaimplementuj wzorzec fabryki/metody fabrykującej, tak aby na podstawie konkretnej wartości z enum
         // zwrócić obiekt gry. Z tego obiektu można następnie pobrać nazwę gry i dodać do menu oraz metodę zwracającą
         // samą grę i po kliknięciu w wybrany element listy wywoływać ją, aby doklejać zawartość do gameContainer.
@@ -27,8 +35,8 @@ class App {
                     const gameName = <HTMLLIElement>(document.createElement('li'));
                     gameName.innerText = `${element}`;
                     gameName.addEventListener('click', e => {
-                        const selectedGame: string = (e.target as HTMLElement).innerText;
-                        this._gameFactory.createGame(Games[selectedGame])
+                        const newGameName: string = (e.target as HTMLElement).innerText;
+                        this.changeGame( newGameName )
                     });
                     list.appendChild(gameName);
                 }
@@ -36,8 +44,8 @@ class App {
 
         menuContainer.appendChild(list);
         document.body.appendChild(menuContainer);
-        document.body.appendChild(gameContainer);
+        document.body.appendChild(this.gameContainer);
     }
 }
 
-new App();
+new App(); 
