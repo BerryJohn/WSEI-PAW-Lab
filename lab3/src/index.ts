@@ -5,7 +5,7 @@ import './styles/styles.scss';
 class App {
     private _gameFactory: gameFactory;
     private gameContainer: HTMLDivElement;
-
+    
     constructor() {
         this._gameFactory = new gameFactory();
         this.initMenu();        
@@ -13,8 +13,13 @@ class App {
 
     changeGame(name: string): void{
         const game = this._gameFactory.createGame(Games[name]);
-        this.gameContainer.innerHTML = ''; //clear
-        this.gameContainer.appendChild(game.getGameElement());
+            try{
+                this.gameContainer.innerHTML = ''; //clear
+                this.gameContainer.appendChild(game.getGameElement());
+            }
+            catch{
+                console.log('Error');
+            }
     }
 
     initMenu(): void {
@@ -33,12 +38,15 @@ class App {
             if(isNaN(Number(element)))
                 {
                     const gameName = <HTMLLIElement>(document.createElement('li'));
-                    gameName.innerText = `${element}`;
-                    gameName.addEventListener('click', e => {
-                        const newGameName: string = (e.target as HTMLElement).innerText;
-                        this.changeGame( newGameName )
+                    {
+                        gameName.innerText = `${element}`;
+                        gameName.addEventListener('click', e => {
+                            const newGameName: string = (e.target as HTMLElement).innerText;                     
+                            this.changeGame( newGameName )
                     });
                     list.appendChild(gameName);
+                    }
+
                 }
         }
 

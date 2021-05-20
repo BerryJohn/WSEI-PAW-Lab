@@ -17,6 +17,7 @@ export class board{
         {
             const element: HTMLElement = document.createElement('div');
             element.classList.add('field');
+            
             element.id = `${i}`;
 
             let newCell = new cell(element);
@@ -29,6 +30,12 @@ export class board{
         for (const element of this._cellArr) {
             this._board.appendChild(element._htmlElement);
         }
+        const playerInfo = document.createElement('div');
+        playerInfo.classList.add('playerinfo');
+        const player = document.createElement('span');
+        player.id = 'currentPlayer'
+        playerInfo.appendChild(player);
+        this._board.appendChild(playerInfo)
     }
     move(ev: EventTarget): void{
         const currentCell = this._cellArr.filter(el => el._htmlElement == ev)
@@ -67,7 +74,6 @@ export class board{
             if(this._cellArr[2]._value == this._cellArr[4]._value && this._cellArr[2]._value == this._cellArr[6]._value)
             this.callWinner()
         //draw
-        console.log(this._allMoves);
         if(this._allMoves == this._cellArr.length)
             this.callDraw();
                 
