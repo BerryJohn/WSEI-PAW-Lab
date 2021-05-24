@@ -7,7 +7,7 @@ POST http://localhost:8080/products HTTP/1.1
 content-type: application/json
 
 {
-    "id": 4,
+    "id": 2,
     "name": "Telewizor",
     "desc": "Telewizor plazmowy",
     "price": 5000
@@ -19,11 +19,27 @@ PUT http://localhost:8080/products
 content-type: application/json
 
 {
-    "id": 3,
+    "id": 2,
     "name": "Telewizor",
     "desc": "Telewizor zmieniony",
     "price": 2137
 }
 
 ###
-DELETE http://localhost:8080/products/3 HTTP/1.1
+DELETE http://localhost:8080/products/2 HTTP/1.1
+
+///////////////////////// CARS
+###
+GET http://localhost:8080/cars
+###
+
+POST http://localhost:8080/cars HTTP/1.1
+content-type: application/json
+
+{
+    "id": 1,
+    "model": "Lexus",
+    "fuel": "LPG",
+    "desc": "złoto panie",
+    "price": 5000
+}
