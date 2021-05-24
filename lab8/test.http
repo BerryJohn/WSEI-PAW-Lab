@@ -1,5 +1,5 @@
 ###
-GET http://localhost:8080/
+GET http://localhost:8080/products
 
 ###
 
@@ -7,9 +7,22 @@ POST http://localhost:8080/products HTTP/1.1
 content-type: application/json
 
 {
+    "id": 4,
     "name": "Telewizor",
-    "description": "Telewizor plazmowy",
+    "desc": "Telewizor plazmowy",
     "price": 5000
+}
+
+###
+
+PUT http://localhost:8080/products
+content-type: application/json
+
+{
+    "id": 3,
+    "name": "Telewizor",
+    "desc": "Telewizor zmieniony",
+    "price": 2137
 }
 
 ###
