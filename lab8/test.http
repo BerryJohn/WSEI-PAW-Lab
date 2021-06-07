@@ -1,5 +1,7 @@
 ###
 GET http://localhost:8080/products
+###
+GET http://localhost:8080/categories
 
 ###
 
@@ -7,10 +9,18 @@ POST http://localhost:8080/products HTTP/1.1
 content-type: application/json
 
 {
-    "id": 2,
     "name": "Telewizor",
-    "desc": "Telewizor plazmowy",
+    "description": "Telewizor plazmowy",
     "price": 5000
+}
+
+###
+
+POST http://localhost:8080/categories HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Plazma"
 }
 
 ###
@@ -19,15 +29,19 @@ PUT http://localhost:8080/products
 content-type: application/json
 
 {
-    "id": 2,
-    "name": "Telewizor",
-    "desc": "Telewizor zmieniony",
+    "id": "60ba29cdcd93ac36f8dbc9ea",
+    "name": "Telewizor Plaski",
+    "description": "Telewizor zmieniony",
     "price": 2137
 }
 
 ###
-DELETE http://localhost:8080/products/2 HTTP/1.1
+DELETE http://localhost:8080/products HTTP/1.1
+content-type: application/json
 
+{
+    "id": "60ba29cdcd93ac36f8dbc9ea"
+}
 ///////////////////////// CARS
 ###
 GET http://localhost:8080/cars
