@@ -1,0 +1,36 @@
+.chat{
+    display:flex;
+    flex-direction: column;
+    padding:10px;
+    justify-content: center;
+    align-items: center;
+    width:400px;
+    min-height: 50px;
+}
+
+#msg{
+    width:200px;
+    height:20px;
+    font-size:16px;
+}
+
+#send{
+    width:50px;
+    height:20px;
+}
+
+.messages{
+    width:100%;
+    min-height:100px;
+    display:flex;
+    flex-direction: column;
+}
+
+.recived{
+    background-color: rgba(85, 193, 255, 0.267);
+    border-radius:2px;
+    padding: 5px 10px;
+    justify-self: flex-start;
+    width:auto;
+    margin-top:5px;
+}

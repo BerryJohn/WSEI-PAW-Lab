@@ -1,0 +1,25 @@
+
+@import '_mixins.scss';
+
+.menuContainer{
+    @include flex-center();
+    background-color: $bg-left-color;
+    height:100vh;
+    width:150px;
+    ul{
+        padding:0px;
+        li{
+            list-style: none;
+            cursor: pointer;
+            margin-top:2px;
+            padding:10px;
+            background-color: $button-color;
+            transition: .2s;
+            border-radius:2px;
+            &:hover{
+                background-color: aliceblue;
+            }
+        }  
+    }
+
+}

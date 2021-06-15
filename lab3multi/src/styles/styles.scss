@@ -1,0 +1,11 @@
+@import '_veriables.scss';
+@import '_menuContainer.scss';
+@import '_gameContainer.scss';
+
+body {
+  margin:0px;
+  padding:0px;
+  display:flex;
+  min-height: 100vh;
+  font-family: sans-serif;
+}

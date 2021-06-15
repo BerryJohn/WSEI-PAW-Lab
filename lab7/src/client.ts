@@ -1,15 +1,42 @@
+import './styles/styles.scss';
+
 let socket = new WebSocket("ws://localhost:8080");
+let userName:string = '';
+
+do{
+  userName = prompt('Your nickname:');
+}while(userName == '');
+
 
 socket.onopen = function(e) {
     alert("Connected");
-    socket.send("Hello!");
-  };
+    socket.send(`User ${userName} connected!`);
+};
 
-  socket.onopen = function(e) {
-    alert("Connected");
-    socket.send("Hello!");
-  };
+socket.onmessage = (e) => {
+    const msg = document.querySelector('.messages');
+    const item = document.createElement('div');
+    item.classList.add('recived');
+    item.textContent = e.data;
+    msg?.appendChild(item);
+    console.log(e.data);
+};
 
-  document.getElementById('send').addEventListener('click', () => {
-    socket.send('new message')
-})
+const sendMessage = () => {
+  const inputMsg = <HTMLInputElement>document.querySelector('#msg');
+  if(inputMsg.value.length != 0)
+  {  
+    const msg = inputMsg.value;
+    socket.send(`${userName}: ${msg}`);
+    inputMsg.value = ``;
+  }
+}
+
+document.getElementById('send').addEventListener('click', () => {sendMessage()});
+
+document.addEventListener('keyup', (e) => {
+  if(e.key === 'Enter')
+  {
+    sendMessage();
+  }
+});
